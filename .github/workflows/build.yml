@@ -1,0 +1,34 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions: read-all
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Full history is needed for SonarQube analysis
+
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      # Uncomment below to enforce Quality Gate status (fail the job if Quality Gate is red)
+      # - name: SonarQube Quality Gate Check
+      #   uses: sonarsource/sonarqube-quality-gate-action@master
+      #   timeout-minutes: 5
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
