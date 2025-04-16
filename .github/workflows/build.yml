@@ -20,13 +20,18 @@ jobs:
         with:
           fetch-depth: 0  # Full history is needed for SonarQube analysis
 
+      - name: Clear SonarQube Cache
+        run: rm -rf ~/.sonar/cache
+
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: --debug
 
-      # Uncomment below to enforce Quality Gate status (fail the job if Quality Gate is red)
+      # Uncomment to enforce Quality Gate
       # - name: SonarQube Quality Gate Check
       #   uses: sonarsource/sonarqube-quality-gate-action@master
       #   timeout-minutes: 5
