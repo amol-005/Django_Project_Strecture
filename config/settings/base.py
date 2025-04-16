@@ -50,7 +50,6 @@ THIRDPARTY_APPS = [
 CUSTOME_APPS = [
     'project.app1',
     'project.app2',
-    'project.app3',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRDPARTY_APPS + CUSTOME_APPS

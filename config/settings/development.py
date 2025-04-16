@@ -18,3 +18,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+USERNAME = 'amol@2025'
+PASSWORD = 'Amol@2025'
